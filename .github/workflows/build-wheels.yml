@@ -5,14 +5,14 @@ on:
     inputs:
       version:
         description: 'Version tag of flash-attention to build: (format: v2.3.4/v2.3.4.post1)'
-        default: 'v2.3.4'
+        default: 'v2.6.3'
         required: true
         type: string
   workflow_call:
     inputs:
       version:
         description: 'Version tag of flash-attention to build (format: v2.3.4/v2.3.4.post1)'
-        default: 'v2.3.4'
+        default: 'v2.6.3'
         required: true
         type: string
 
@@ -26,9 +26,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        pyver: ["3.8", "3.9", "3.10", "3.11", "3.12"]
-        cuda: ["12.3.2"]
-        torchver: ["2.2.2", "2.3.1", "2.4.0"]
+        pyver: ["3.10", "3.11"]
+        cuda: ["12.4.0"]
+        torchver: ["2.4.0"]
     defaults:
       run:
         shell: pwsh
