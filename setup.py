@@ -266,7 +266,7 @@ if not SKIP_CUDA_BUILD and not IS_ROCM:
                 "csrc/flash_attn/src/flash_fwd_split_hdim256_bf16_causal_sm80.cu",
             ],
             extra_compile_args={
-                "cxx": ["-O3", "-std=c++17"] + generator_flag,
+                "cxx": ["/O2", "/std:c++17"] + generator_flag,
                 "nvcc": append_nvcc_threads(
                     [
                         "-O3",
@@ -278,7 +278,7 @@ if not SKIP_CUDA_BUILD and not IS_ROCM:
                         "--expt-relaxed-constexpr",
                         "--expt-extended-lambda",
                         "--use_fast_math",
-                        "--ptxas-options=-v",
+                        # "--ptxas-options=-v",
                         "--ptxas-options=-O2",
                         "-lineinfo",
                         # "-DFLASHATTENTION_DISABLE_BACKWARD",
@@ -350,7 +350,7 @@ elif not SKIP_CUDA_BUILD and IS_ROCM:
                        "csrc/flash_attn_ck/mha_varlen_bwd.cu",
                        "csrc/flash_attn_ck/mha_varlen_fwd.cu"] + glob.glob(f"build/fmha_*wd*.cu")
     extra_compile_args = {
-        "cxx": ["-O3", "-std=c++17"] + generator_flag,
+        "cxx": ["/O2", "/std:c++17"] + generator_flag,
         "nvcc":
             [
                 "-O3","-std=c++17",
