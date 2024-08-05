@@ -21,7 +21,7 @@ permissions:
 
 jobs:
   build_wheels:
-    name: Build wheels for Python ${{ matrix.pyver }}, CUDA ${{ matrix.cuda }}, and Torch ${{ matrix.torchver }}
+    name: Build wheels for Python ${{ matrix.pyver }}, CUDA ${{ matrix.cuda }}, and Torch ${{ matrix.torchver }}, and parallel ${{ matrix.max_jobs }}
     runs-on: windows-2022
     strategy:
       fail-fast: false
@@ -29,6 +29,10 @@ jobs:
         pyver: ["3.10"]
         cuda: ["12.1.0"]
         torchver: ["2.4.0.dev20240427"]
+        max_jobs:
+          - "1"
+          - "2"
+          
     defaults:
       run:
         shell: pwsh
@@ -105,7 +109,7 @@ jobs:
           $env:CUDA_PATH = $env:CONDA_PREFIX
           $env:CUDA_HOME = $env:CONDA_PREFIX
           
-          $env:MAX_JOBS = '1'
+          $env:MAX_JOBS = ${{ matrix.max_jobs }}
           $env:FLASH_ATTENTION_FORCE_BUILD = 'TRUE'
           $env:FLASH_ATTENTION_FORCE_CXX11_ABI = 'FALSE'
           $env:BUILD_TARGET = "cuda"
