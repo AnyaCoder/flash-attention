@@ -74,7 +74,7 @@ jobs:
           if (!(mamba list cuda)[-1].contains('cuda')) {sleep -s 10; mamba install -y 'cuda' $cudaVersion}
           if (!(mamba list cuda)[-1].contains('cuda')) {throw 'CUDA Toolkit failed to install!'}
 
-          pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1
+          pip install torch==2.4.1 torchvision==0.19.1 torchaudio==2.4.1 --index-url https://download.pytorch.org/whl/cu121
           python -m pip install --upgrade build setuptools wheel packaging ninja psutil
 
       - name: Build Wheel
